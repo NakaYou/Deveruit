@@ -32,9 +32,11 @@ const MyRecruits = () => {
   return (
     <>
       {/* //TODO: カードの間の隙間がないので作る  */}
-      {myRecruits.map(({ title, imgPath }) => (
-        <MyRecruitCard title={title} imgPath={imgPath} />
-      ))}
+      <div className="grid grid-cols-1 gap-4">
+        {myRecruits.map(({ title, imgPath }) => (
+          <MyRecruitCard title={title} imgPath={imgPath} />
+        ))}
+      </div>
     </>
   );
 };
