@@ -120,7 +120,7 @@ func userAuthFromDjango(info *GitHubInfo) *Token {
 	githubName := info.Login
 	avatarUrl := info.Avatar
 
-	url := "https://deveruit-api.herokuapp.com/api/user/"
+	url := "https://deveruit-api2.herokuapp.com/api/user/"
 	var jsonStr = []byte(`{"github_name":"` + githubName + `",
 	"image":"` + avatarUrl + `",
 	"password":"` + githubName + `"}`)
@@ -137,7 +137,7 @@ func userAuthFromDjango(info *GitHubInfo) *Token {
 	str := string(body)
 	fmt.Println("response Body:", str)
 
-	url = "https://deveruit-api.herokuapp.com/auth/"
+	url = "https://deveruit-api2.herokuapp.com/auth/"
 	jsonStr = []byte(`{"username":"` + githubName + `",
 	"password":"` + githubName + `"}`)
 	req, err = http.NewRequest("POST", url, bytes.NewBuffer(jsonStr))
