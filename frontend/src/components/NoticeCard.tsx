@@ -14,7 +14,7 @@ const NoticeCard: FC<Props> = ({ cardtype, userName, iconPath, title, message })
     const userlink: string= "https://github.com/" + userName;
     if (cardtype === 'sinsei') {
         return (
-            <div className="mx-auto w-2/5 h-auto bg-gray-300 rounded-lg hover:opacity-90 hover:shadow-lg">
+            <div className="m-10 mx-auto w-2/5 h-auto bg-gray-300 rounded-lg hover:opacity-90 hover:shadow-lg">
                 <div className=" text-center">
                     <div className="flex text-4xl">
                         <img src={iconPath} className="rounded-full h-20 m-5" />
@@ -41,7 +41,7 @@ const NoticeCard: FC<Props> = ({ cardtype, userName, iconPath, title, message })
         )
     } else if (cardtype === 'syounin') {
         return (
-            <div className="mx-auto w-2/5 pb-10 bg-gray-300 rounded-lg hover:opacity-90 hover:shadow-lg">
+            <div className="m-10 mx-auto w-2/5 pb-10 bg-gray-300 rounded-lg hover:opacity-90 hover:shadow-lg">
                 <div className="text-center">
                     <div className="flex text-4xl">
                         <img src={iconPath} className="rounded-full h-20 m-5" />
@@ -57,7 +57,7 @@ const NoticeCard: FC<Props> = ({ cardtype, userName, iconPath, title, message })
         )
     } else {
         return (
-            <div className="mx-auto w-2/5 pb-10 bg-gray-300 rounded-lg hover:opacity-90 hover:shadow-lg">
+            <div className="m-10 mx-auto w-2/5 pb-10 bg-gray-300 rounded-lg hover:opacity-90 hover:shadow-lg">
                 <div className="text-center">
                     <div className="flex text-4xl">
                         <img src={iconPath} className="rounded-full h-20 m-5" />
