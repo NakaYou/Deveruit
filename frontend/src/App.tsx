@@ -4,7 +4,7 @@ import TimeLine from "./pages/Timeline";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 import NewRecruitForm from "./pages/New";
-import Detail from "./pages/Detail";
+import Detail from "./pages/Details";
 import Notice from "./pages/Notice";
 import Recruits from "./pages/Recruits";
 import { Route, Routes } from "react-router-dom";
