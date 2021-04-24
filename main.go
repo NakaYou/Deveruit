@@ -20,6 +20,10 @@ type GitHubInfo struct {
 	Avatar string `json:"avatar_url"`
 }
 
+type Token struct {
+	Token string `json:"token"`
+}
+
 func main() {
 	http.HandleFunc("/", githubAuth)
 
@@ -78,7 +82,9 @@ func getAccessToken(w http.ResponseWriter, code string) {
 
 	info := getGitHubInfo(token)
 
-	output, err := json.MarshalIndent(&info, "", "\t\t")
+	authToken := userAuthFromDjango(info)
+
+	output, err := json.MarshalIndent(&authToken, "", "\t\t")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
@@ -108,4 +114,44 @@ func getGitHubInfo(token string) *GitHubInfo {
 	json.Unmarshal(body, &githubInfo)
 	fmt.Println(githubInfo)
 	return &githubInfo
+}
+
+func userAuthFromDjango(info *GitHubInfo) *Token {
+	githubName := info.Login
+	avatarUrl := info.Avatar
+
+	url := "http://deveruit-api.herokuapp.com/api/user/"
+	var jsonStr = []byte(`{"github_name":"` + githubName + `",
+	"image":"` + avatarUrl + `",
+	"password":"` + githubName + `"}`)
+	req, err := http.NewRequest("POST", url, bytes.NewBuffer(jsonStr))
+	req.Header.Set("Content-Type", "application/json")
+
+	client := &http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		panic(err)
+	}
+	defer resp.Body.Close()
+	body, _ := ioutil.ReadAll(resp.Body)
+	str := string(body)
+	fmt.Println("response Body:", str)
+
+	url = "http://deveruit-api.herokuapp.com/auth/"
+	jsonStr = []byte(`{"username":"` + githubName + `",
+	"password":"` + githubName + `"}`)
+	req, err = http.NewRequest("POST", url, bytes.NewBuffer(jsonStr))
+	req.Header.Set("Content-Type", "application/json")
+
+	client = &http.Client{}
+	resp, err = client.Do(req)
+	if err != nil {
+		panic(err)
+	}
+	defer resp.Body.Close()
+	body, _ = ioutil.ReadAll(resp.Body)
+	var token Token
+	json.Unmarshal(body, &token)
+	fmt.Println("accessToken:", token)
+	return &token
 }
