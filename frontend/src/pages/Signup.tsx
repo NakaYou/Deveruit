@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { useForm } from "react-hook-form";
+import axios from "axios"
 
 type FormInput = {
   email: string;
@@ -17,7 +18,9 @@ const Signup: FC = () => {
     shouldFocusError: false,
   });
   // TODO: サーバーサイド側にデータを送る
-  const onSubmit = (data: FormInput) => console.log(data);
+  const onSubmit = (data: FormInput) => {
+    console.log(data);
+  }
 
   // const passwordRef = useRef(null);
 
