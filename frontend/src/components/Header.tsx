@@ -105,8 +105,8 @@ const Bar: FC<BarProps> = ({ isLogin, userName, iconPath }) => {
 const Header: FC<HeaderProps> = ({ isLogin, userName, iconPath }) => {
   isLogin = true;
   return (
-    <div className="flex">
-      <div className="p-5 pr-0 pt-0 bg-green-300 flex mb-auto w-full">
+    <div className="flex mb-20">
+      <div className="p-5 pr-0 pt-0 bg-green-300 flex w-full">
         <Link to="/" className="text-7xl text-white">
           Deveruit
         </Link>
