@@ -25,13 +25,13 @@ const NoticeCard: FC<Props> = ({ cardtype, userName, iconPath, title, message })
                     <div className="text-center">
                         <button
                             className=" w-20 mr-20 rounded-lg bg-white"
-                            onClick={() => alert("syounin")}
+                            onClick={() => alert("syounin")} //SyouninHandlerを作る
                         >
                             <span className="text-green-300 text-4xl">承認</span>
                         </button>
                         <button
                             className="w-20 rounded-lg bg-white mb-10"
-                            onClick={() => alert("kyohi")}
+                            onClick={() => alert("kyohi")} //KyohiHandlerを作る
                         >
                             <span className="text-red-300 text-4xl">拒否</span>
                         </button>
