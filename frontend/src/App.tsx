@@ -9,7 +9,9 @@ import Detail from "./pages/Details";
 import Recruits from "./pages/Recruits";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
+import NoticeCard from "./components/NoticeCard";
 import Header from "./components/Header"
+
 function App() {
   return (
     <>
