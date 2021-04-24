@@ -34,7 +34,7 @@ const TimeLine: FC = () => {
   ];
 
   return (
-    <>
+    <div className="grid grid-cols-1 gap-4">
       {timeline.map(({ id, title, userName, imgPath }) => (
         <RecruitCard
           id={id}
@@ -43,7 +43,7 @@ const TimeLine: FC = () => {
           imgPath={imgPath}
         />
       ))}
-    </>
+    </div>
   );
 };
 
