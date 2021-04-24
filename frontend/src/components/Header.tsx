@@ -28,64 +28,70 @@ const Signinbar: FC<SigninProps> = () => {
       <Link to="/signup" className="mr-5 my-auto hover:text-gray-500">
         新規登録
       </Link>
-      <Link to="/signin" className=" my-auto hover:text-gray-500">ログイン</Link>
+      <Link to="/signin" className=" my-auto hover:text-gray-500">
+        ログイン
+      </Link>
     </div>
   );
 };
 
 const Menubar: FC<MenuProps> = ({ userName, iconPath }) => {
   const [isOpenedMenu, setmenu] = useState(false);
-  if (isOpenedMenu)
-    return (
-      <div className="text-3xl text-right m-3 ml-auto mb-auto bg-green-300">
-        <div className="flex ml-auto mb-auto">
-          <img
-            className="rounded-full h-20"
-            src={"https://avatars.githubusercontent.com/u/72610232?v=4"}
-            alt="アイコン"
-          />
-          <p className="  text-7xl ">{userName}</p>
-          <img
-            className="w-20 h-20"
-            src={close}
-            onClick={() => setmenu(!isOpenedMenu)}
-          />
-        </div>
-        <div className="text-center leading-10 list-none">
-          <li>
-            <Link to="/">タイムライン</Link>
-          </li>
-          <li>
-            <Link to="/notice">通知</Link>
-          </li>
-          <li>
-            <Link to="/new">開発募集をかける</Link>
-          </li>
-          <li>
-            <Link to="/:usrename/recruits">自分の募集</Link>
-          </li>
-          <li>
-            <Link to="/logout">ログアウト</Link>
-          </li>
-        </div>
-      </div>
-    );
-  else
-    return (
-      <div className="flex ml-auto mb-auto mt-auto ">
+
+  return (
+    <div className="flex ml-auto relative">
+      <div className="flex my-auto z-40">
         <img
-          className="rounded-full h-20 m-3 mr-0"
+          className="rounded-full h-10 mr-1"
           src={"https://avatars.githubusercontent.com/u/72610232?v=4"}
           alt="アイコン"
         />
-        <p className=" mt-3 mr-3 text-7xl mt-0 ">{userName}</p>
+        <p className="text-3xl mr-2">{userName}</p>
+      </div>
+      {isOpenedMenu ? (
+        <>
+          <img
+            className="my-3 w-8 h-8 z-40 mr-2 my-auto"
+            src={close}
+            onClick={() => setmenu(!isOpenedMenu)}
+          />
+          <div className="absolute text-center w-full bg-green-200 leading-10 list-none top-0 right-0 shadow-xl z-0">
+            <li className="mt-20">
+              <Link to="/" className="hover:text-gray-500">
+                タイムライン
+              </Link>
+            </li>
+            <li>
+              <Link to="/notice" className="hover:text-gray-500">
+                通知
+              </Link>
+            </li>
+            <li>
+              <Link to="/new" className="hover:text-gray-500">
+                開発募集をかける
+              </Link>
+            </li>
+            <li>
+              <Link to="/:usrename/recruits" className="hover:text-gray-500">
+                自分の募集
+              </Link>
+            </li>
+            <li>
+              <Link to="/logout" className="hover:text-gray-500">
+                ログアウト
+              </Link>
+            </li>
+          </div>
+        </>
+      ) : (
         <img
-          className="w-20 h-20"
+          className="my-3 w-8 h-8 mr-2 my-auto"
           src={menu}
           onClick={() => setmenu(!isOpenedMenu)}
         />
-      </div>
-    );
+      )}
+    </div>
+  );
 };
 
 const Bar: FC<BarProps> = ({ isLogin, userName, iconPath }) => {
@@ -97,10 +103,13 @@ const Bar: FC<BarProps> = ({ isLogin, userName, iconPath }) => {
 };
 
 const Header: FC<HeaderProps> = ({ isLogin, userName, iconPath }) => {
+  isLogin = true;
   return (
     <div className="flex">
-      <div className="p-5 bg-green-300 flex mb-auto w-full">
-        <Link to="/" className="text-7xl text-white">Deveruit</Link>
+      <div className="p-5 pr-0 pt-0 bg-green-300 flex mb-auto w-full">
+        <Link to="/" className="text-7xl text-white">
+          Deveruit
+        </Link>
         <Bar isLogin={isLogin} userName={userName} iconPath={iconPath} />
       </div>
     </div>
