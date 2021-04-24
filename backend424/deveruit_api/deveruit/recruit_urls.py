@@ -5,7 +5,7 @@ from rest_framework.routers import DefaultRouter
 app_name = 'recruit'
 
 router = DefaultRouter()
-router.register('', views.RecruitmentViewSet, basename="recruit")
+router.register('recruit', views.RecruitmentViewSet, basename="recruit")
 router.register('request', views.RequestViewSet, basename="request")
 router.register('message', views.MessageViewSet, basename="message")
 

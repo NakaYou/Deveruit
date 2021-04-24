@@ -19,22 +19,15 @@ class RecruitmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Recruitment
         fields = ('id', 'created_user', 'img', 'detail', 'approval_msg', 'refusal_msg', 'title', 'created_at', 'updated_at')
-        extra_kwargs= {'created_user':{'read_only': True}}
 
-class RecruitmentSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Recruitment
-        fields = ('id', 'created_user', 'img', 'detail', 'approval_msg', 'refusal_msg', 'title', 'created_at', 'updated_at')
-        extra_kwargs= {'created_user':{'read_only': True}}
 
 class RequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Request
         fields = ('id', 'applicant', 'recruiter', 'is_approved', 'is_processed', 'created_at')
-        extra_kwargs= {'recruiter':{'read_only': True}}
+
 
 class MessageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Message
-        fields = ('id', 'sender', 'receiver', 'is_read', 'recruitment', 'created_at')
-        extra_kwargs= {'sender':{'read_only': True}}
+        fields = ('id', 'sender', 'receiver', 'is_read', 'created_at')

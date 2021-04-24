@@ -88,7 +88,6 @@ class Message(models.Model):
         on_delete=models.CASCADE
     )
     is_read = models.BooleanField(default=False)
-    recruitment = models.ForeignKey(Recruitment, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)    
 
     def __str__(self):

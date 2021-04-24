@@ -11,18 +11,13 @@ class CreateUserView(generics.CreateAPIView):
 class RecruitmentViewSet(viewsets.ModelViewSet):
     queryset = Recruitment.objects.all()
     serializer_class = serializers.RecruitmentSerializer
-    authentication_classes = (authentication.TokenAuthentication,)
-    permission_classes = (permissions.IsAuthenticated,)
+
 
 class RequestViewSet(viewsets.ModelViewSet):
     queryset = Request.objects.all()
     serializer_class = serializers.RequestSerializer
-    authentication_classes = (authentication.TokenAuthentication,)
-    permission_classes = (permissions.IsAuthenticated,)
 
 class MessageViewSet(viewsets.ModelViewSet):
     queryset = Message.objects.all()
     serializer_class = serializers.MessageSerializer
-    authentication_classes = (authentication.TokenAuthentication,)
-    permission_classes = (permissions.IsAuthenticated,)
 
