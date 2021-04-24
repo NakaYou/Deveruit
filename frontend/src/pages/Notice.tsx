@@ -39,7 +39,6 @@ const Notice: FC = () => {
     ];
     return (
         <>
-    <Header isLogin={true} userName={"NakaYou"} iconPath="https://avatars.githubusercontent.com/u/72610232?v=4" />
             {notice.map(({ cardtype, title, userName, iconPath, message }) => (
                 <NoticeCard
                     cardtype={cardtype}
