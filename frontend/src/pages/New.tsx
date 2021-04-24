@@ -38,7 +38,7 @@ const NewRecruitForm: FC = () => {
           <label>募集のタイトル</label>
           <br />
           <textarea
-            className="w-1/2 h-15"
+            className="w-1/2 h-15 border-gray-300"
             placeholder={titlePlaceholder}
             {...register("title", { required: true, maxLength: 50 })}
           />
@@ -49,7 +49,7 @@ const NewRecruitForm: FC = () => {
           <label>募集要項</label>
           <br />
           <textarea
-            className="w-1/2 h-40"
+            className="w-1/2 h-40 border-gray-300"
             placeholder={requirementsPlaceholder}
             {...register("requirements", { required: true })}
           />
@@ -58,7 +58,7 @@ const NewRecruitForm: FC = () => {
           <label>詳細説明</label>
           <br />
           <textarea
-            className="w-1/2 h-40"
+            className="w-1/2 h-40 border-gray-300"
             placeholder={descriptionPlaceholder}
             {...register("description", { required: true })}
           />
@@ -67,7 +67,7 @@ const NewRecruitForm: FC = () => {
           <label>承認メッセージ</label>
           <br />
           <textarea
-            className="w-1/2 h-20"
+            className="w-1/2 h-20 border-gray-300"
             defaultValue={defaultApprovalMessage}
             {...register("approvalMessage", { required: true })}
           />
@@ -76,14 +76,14 @@ const NewRecruitForm: FC = () => {
           <label>拒否メッセージ</label>
           <br />
           <textarea
-            className="w-1/2 h-20"
+            className="w-1/2 h-20 border-gray-300"
             defaultValue={defaultRejectedMessage}
             {...register("rejectedMessage", { required: true })}
           />
         </div>
 
         <input
-          className="p-2 bg-blue-600 rounded-full text-white"
+          className="p-2 bg-blue-600 rounded-full text-white hover:bg-opacity-90"
           type="submit"
           value="募集をかける"
         />
