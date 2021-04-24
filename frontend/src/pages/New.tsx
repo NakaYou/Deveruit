@@ -41,8 +41,11 @@ const NewRecruitForm: FC = () => {
 
   return (
     <div className="w-3/4 mx-auto">
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="mb-4">
+      <form
+        className="flex flex-col justify-center text-center"
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <div className="mb-4 px-auto">
           <label>募集のタイトル</label>
           <br />
           <textarea
@@ -140,7 +143,7 @@ const NewRecruitForm: FC = () => {
         </div>
 
         <input
-          className="p-2 bg-blue-600 rounded-full text-white hover:bg-opacity-90"
+          className="p-2 w-28 mx-auto bg-blue-600 rounded-full text-white hover:bg-opacity-90"
           type="submit"
           value="募集をかける"
         />
