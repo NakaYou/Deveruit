@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { useForm } from "react-hook-form";
-import axios from "axios"
+import axios from "axios";
 
 type FormInput = {
   email: string;
@@ -17,10 +17,17 @@ const Signup: FC = () => {
     reValidateMode: "onSubmit",
     shouldFocusError: false,
   });
+
   // TODO: サーバーサイド側にデータを送る
-  const onSubmit = (data: FormInput) => {
-    console.log(data);
-  }
+  const onSubmit = async (data: FormInput) => {
+    const { email, githubID, password } = data;
+    const res = await axios.post("/api/user/create", {
+      github_url: `https://github.com/${githubID}`,
+      email,
+      password,
+    });
+    console.log(res);
+  };
 
   // const passwordRef = useRef(null);
 
@@ -72,7 +79,6 @@ const Signup: FC = () => {
               {errors.password?.type === "minLength" &&
                 "8文字以上で入力してください"}
             </div>
-            {console.log(errors.password)}
 
             {/* <input
               type="password"
