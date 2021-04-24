@@ -10,7 +10,7 @@ type Props = {
 
 const RecruitCard: FC<Props> = ({ id, title, userName, imgPath }) => {
   return (
-    <div className="mx-auto grid grid-cols-4 w-3/4 bg-gray-300 rounded-lg hover:opacity-90 hover:shadow-lg">
+    <div className="mx-auto grid grid-cols-4 w-1/2 bg-gray-300 rounded-lg hover:opacity-90 hover:shadow-lg">
       <img
         className="m-auto p-2 h-32"
         height={10}
