@@ -18,8 +18,8 @@ class RecruitmentViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.RecruitmentSerializer
     authentication_classes = (authentication.TokenAuthentication,)
 
-    def perform_create(self, serializer):
-        serializer.save(created_user=self.request.user)
+    # def perform_create(self, serializer):
+    #     serializer.save(created_user=self.request.user)
     
 class MyRecruitmentViewSet(viewsets.ModelViewSet):
     queryset = Recruitment.objects.all()
