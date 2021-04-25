@@ -23,14 +23,12 @@ const Details: FC<Props> = ({ recruits }) => {
     <>
       <div className="text-center w-full text-2xl">
         <div className="m-10">{title}</div>
-        <div className="ms-auto m-10">
-          <img
-            src={img}
-            className="m-10 h-64 mx-auto shadow-2xl rounded-md"
-          />
-        </div>
+        {/* <div className="ms-auto m-10">
+          <img src={img} className="m-10 h-64 mx-auto shadow-2xl rounded-md" />
+        </div> */}
         <div className="m-10">
-          企画者<br/>
+          企画者
+          <br />
           {created_user}さん
         </div>
         <div className="m-10 my-3">

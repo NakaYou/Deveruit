@@ -46,7 +46,7 @@ const GitHubAuth = () => {
       <GitHubLogin
         className="mx-auto h-30  mt-24 py-2 px-2 focus:outline-none block border-black border rounded-full hover:border-purple-600 hover:text-purple-600"
         clientId="224561ede850fd53d6a2"
-        redirectUri="https://deveruit-f90b9.web.app/"
+        redirectUri="http://localhost:3000/"
         onSuccess={getAccessToken}
         onFailure={(response) => console.log(response)}
       >

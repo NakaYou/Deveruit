@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { loginState } from "../atoms";
 import { useRecoilState } from "recoil";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const titlePlaceholder =
   "サポーターズのハッカソンに一緒に出場してくれるメンバーを募集！";
@@ -19,7 +20,7 @@ const defaultRejectedMessage = "今回は申し訳ありません:(";
 
 type FormInput = {
   created_user: string;
-  img: File;
+  img: File | null;
   detail: string;
   description: string;
   approval_msg: string;
@@ -28,6 +29,8 @@ type FormInput = {
 };
 
 const NewRecruitForm: FC = () => {
+  const navigate = useNavigate();
+
   const {
     register,
     formState: { errors },
@@ -38,16 +41,26 @@ const NewRecruitForm: FC = () => {
   });
   // TODO: サーバーサイド側にデータを送る
   const onSubmit = (data: FormInput) => {
-    const sendData = { ...data, id: login.id };
+    const sendData = { ...data, created_user: login.id };
     console.log(sendData);
+    sendData["img"] = null;
+
     axios
-      .post("https://deveruit-api2.herokuapp.com/api/recruit/", sendData, {
-        headers: {
-          Authorization: `Token ${localStorage.getItem("authToken")}`,
-        },
-      })
-      .then((res) => {
-        console.log(res);
+      .post(
+        "https://deveruit-api2.herokuapp.com/api/recruit/",
+        sendData,
+        {
+          headers: {
+            Authorization: `Token ${localStorage.getItem("authToken")}`,
+          },
+        }
+      )
+      .then((r) =>{
+        navigate('/')
+        console.log(r)}
+      )
+      .catch((r) => {
+        console.log(r);
       });
   };
   const [login, setLogin] = useRecoilState(loginState);
