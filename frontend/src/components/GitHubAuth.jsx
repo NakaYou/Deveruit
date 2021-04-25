@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import GitHubLogin from "react-github-login";
 import axios from "axios";
 import { loginState } from "../atoms";
 import { useRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 import github from "../images/Github_icon-icons.com_49946.png";
-
+import loading from "../images/Preloader_9.gif";
 
 const GitHubAuth = () => {
   const [_, setLogin] = useRecoilState(loginState);
@@ -13,6 +13,7 @@ const GitHubAuth = () => {
 
   const getAccessToken = (response) => {
     const code = response.code;
+    setLoad(true)
     console.log(response);
     axios
       .post("https://github-auth-go-api.herokuapp.com/", {
@@ -36,11 +37,14 @@ const GitHubAuth = () => {
               isLogin: true,
             });
             setTimeout(() => {
+              setLoad(false)
               navigate("/");
             }, 100);
+            
           });
       });
   };
+  const [load, setLoad] = useState(false);
   return (
     <>
       <GitHubLogin
@@ -50,7 +54,7 @@ const GitHubAuth = () => {
         onSuccess={getAccessToken}
         onFailure={(response) => console.log(response)}
       >
-
+        {load && <img src={loading} />}
       </GitHubLogin>
     </>
   );
