@@ -23,9 +23,12 @@ const Details: FC<Props> = ({ recruits }) => {
     <>
       <div className="text-center w-full text-2xl">
         <div className="m-10">{title}</div>
-        {/* <div className="ms-auto m-10">
-          <img src={img} className="m-10 h-64 mx-auto shadow-2xl rounded-md" />
-        </div> */}
+        <div className="ms-auto m-10">
+          <img
+            src="https://scontent-nrt1-1.xx.fbcdn.net/v/t1.18169-9/14212218_1161308940593475_1506054425856239035_n.jpg?_nc_cat=107&ccb=1-3&_nc_sid=9267fe&_nc_ohc=Um18U8g01OMAX-yWf4k&_nc_ht=scontent-nrt1-1.xx&oh=9883e55201ff61bb3fb12052119d5d4b&oe=60AC8021"
+            className="m-10 h-64 mx-auto shadow-xl rounded-md"
+          />
+        </div>
         <div className="m-10">
           企画者
           <br />
