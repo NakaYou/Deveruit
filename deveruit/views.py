@@ -13,6 +13,10 @@ class CreateUserView(generics.ListCreateAPIView):
     def get_queryset(self):
         return self.queryset.filter(id=self.request.user.id)
 
+class ListUserView(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = serializers.UserSerializer
+
 class RecruitmentViewSet(viewsets.ModelViewSet):
     queryset = Recruitment.objects.all()
     serializer_class = serializers.RecruitmentSerializer
@@ -33,19 +37,19 @@ class MyRecruitmentViewSet(viewsets.ModelViewSet):
 class RequestViewSet(viewsets.ModelViewSet):
     queryset = Request.objects.all()
     serializer_class = serializers.RequestSerializer
-    authentication_classes = (authentication.TokenAuthentication,)
+    #authentication_classes = (authentication.TokenAuthentication,)
 
-    def get_queryset(self):
-        return self.queryset.filter(recruiter=self.request.user)
+    # def get_queryset(self):
+    #     return self.queryset.filter(recruiter=self.request.user)
     
-    def perform_create(self, serializer):
-        serializer.save(applicant=self.request.user)
+    # def perform_create(self, serializer):
+    #     serializer.save(applicant=self.request.user)
 
 class MessageViewSet(viewsets.ModelViewSet):
     queryset = Message.objects.all()
     serializer_class = serializers.MessageSerializer
-    authentication_classes = (authentication.TokenAuthentication,)
+    # authentication_classes = (authentication.TokenAuthentication,)
 
-    def get_queryset(self):
-        return self.queryset.filter(receiver=self.request.user)
+    # def get_queryset(self):
+    #     return self.queryset.filter(receiver=self.request.user)
 
