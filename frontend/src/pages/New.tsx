@@ -1,13 +1,12 @@
 import React, { FC } from "react";
 import { useForm } from "react-hook-form";
+import { loginState } from "../atoms";
+import { useRecoilState } from "recoil";
+import axios from "axios";
 
 const titlePlaceholder =
   "サポーターズのハッカソンに一緒に出場してくれるメンバーを募集！";
-const requirementsPlaceholder = `4/24-4/25 サポーターズハッカソン vol2
-フロントエンド: 2人
-バックエンド: 2人
-インフラ: 2人
-`;
+
 const descriptionPlaceholder = `僕はReact・TypeScriptを普段書いているので、フロントエンドに関してはReactが書ける人が良いです！
 どういうものを作るかはメンバーが揃い次第決めたいです。
 よろしくお願いします！`;
@@ -19,12 +18,13 @@ const defaultRejectedMessage = "今回は申し訳ありません:(";
 // TODO: マークダウンで書けるようにしたい（？）
 
 type FormInput = {
-  title: string;
-  // thumbnail: File;
-  requirements: string;
+  created_user: string;
+  img: File;
+  detail: string;
   description: string;
-  approvalMessage: string;
-  rejectedMessage: string;
+  approval_msg: string;
+  refusal_msg: string;
+  title: string;
 };
 
 const NewRecruitForm: FC = () => {
@@ -37,8 +37,20 @@ const NewRecruitForm: FC = () => {
     shouldFocusError: false,
   });
   // TODO: サーバーサイド側にデータを送る
-  const onSubmit = (data: FormInput) => console.log(data);
-
+  const onSubmit = (data: FormInput) => {
+    const sendData = { ...data, id: login.id };
+    console.log(sendData);
+    axios
+      .post("https://deveruit-api2.herokuapp.com/api/recruit/", sendData, {
+        headers: {
+          Authorization: `Token ${localStorage.getItem("authToken")}`,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+      });
+  };
+  const [login, setLogin] = useRecoilState(loginState);
   return (
     <div className="w-3/4 mx-auto">
       <form
@@ -53,7 +65,7 @@ const NewRecruitForm: FC = () => {
               errors.title?.type ? "border-red-500" : "border-gray-300"
             }`}
             placeholder={titlePlaceholder}
-            {...register("title", { required: true, maxLength: 5 })}
+            {...register("title", { required: true, maxLength: 50 })}
           />
           <br></br>
           <div className="text-red-500 text-sm">
@@ -64,45 +76,29 @@ const NewRecruitForm: FC = () => {
         </div>
 
         {/* TODO: <label>サムネイルのバリデーション（後回し）</label> */}
-        {/* <div className="mb-4">
+        <div className="mb-4">
           <label>サムネイルの登録</label>
           <br />
-          <input type="file" {...register("thumbnail", { required: false })} />
-        </div> */}
-        <div className="mb-4">
-          <label>募集要項</label>
-          <br />
-          <textarea
-            className={`w-3/4 h-40 border-gray-300 ${
-              errors.rejectedMessage?.type
-                ? "border-red-500"
-                : "border-gray-300"
-            }`}
-            placeholder={requirementsPlaceholder}
-            {...register("requirements", { required: true })}
+          <input
+            className="mt-2"
+            type="file"
+            {...register("img", { required: false })}
           />
-          <br />
-          <div
-            className={`text-red-500  text-sm ${
-              errors.requirements?.type ? "border-red-500" : "border-gray-300"
-            }`}
-          >
-            {errors?.requirements?.type === "required" && "募集要項は必須です"}
-          </div>
         </div>
+
         <div className="mb-4">
           <label>詳細説明</label>
           <br />
           <textarea
             className={`w-3/4 h-40 border-gray-300 ${
-              errors.description?.type ? "border-red-500" : "border-gray-300"
+              errors.detail?.type ? "border-red-500" : "border-gray-300"
             }`}
             placeholder={descriptionPlaceholder}
-            {...register("description", { required: true })}
+            {...register("detail", { required: true })}
           />
           <br />
           <p className="text-red-500  text-sm">
-            {errors?.description?.type === "required" && "詳細説明は必須です"}
+            {errors?.detail?.type === "required" && "詳細説明は必須です"}
           </p>
         </div>
         <div className="mb-4">
@@ -110,16 +106,14 @@ const NewRecruitForm: FC = () => {
           <br />
           <textarea
             className={`w-3/4 h-20 border-gray-300 ${
-              errors.approvalMessage?.type
-                ? "border-red-500"
-                : "border-gray-300"
+              errors.approval_msg?.type ? "border-red-500" : "border-gray-300"
             }`}
             defaultValue={defaultApprovalMessage}
-            {...register("approvalMessage", { required: true })}
+            {...register("approval_msg", { required: true })}
           />
           <br />
           <div className="text-red-500 text-sm">
-            {errors?.approvalMessage?.type === "required" &&
+            {errors?.approval_msg?.type === "required" &&
               "承認メッセージは必須です"}
           </div>
         </div>
@@ -128,16 +122,14 @@ const NewRecruitForm: FC = () => {
           <br />
           <textarea
             className={`w-3/4 h-20 border-gray-300 ${
-              errors.rejectedMessage?.type
-                ? "border-red-500"
-                : "border-gray-300"
+              errors.refusal_msg?.type ? "border-red-500" : "border-gray-300"
             }`}
             defaultValue={defaultRejectedMessage}
-            {...register("rejectedMessage", { required: true })}
+            {...register("refusal_msg", { required: true })}
           />
           <br />
           <div className="text-red-500  text-sm">
-            {errors?.rejectedMessage?.type === "required" &&
+            {errors?.refusal_msg?.type === "required" &&
               "拒否メッセージは必須です"}
           </div>
         </div>

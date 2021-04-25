@@ -1,40 +1,43 @@
 import React, { FC } from "react";
 import MyRecruitCard from "../components/MyRecruitCard";
-
-// 仮のデータ型
-// TODO: バックエンドからどういうデータが来るかを見る
-type fetchedRecruitment = {
+import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { loginState } from "../atoms";
+type fetchedTimeLine = {
+  id: number;
+  created_user: number;
+  img: string;
+  detail: string;
+  approval_msg: string;
+  refusal_msg: string;
   title: string;
-  imgPath: string; // URL型にする？
+  created_at: string;
+  updated_at: string;
 };
 
-const MyRecruits = () => {
-  // deveruit-recruitmentテーブルのデータを取得
-  // TODO: ここをaxiosでサーバーから取得。useEffectを使う（userIdがいるはず）
-  const myRecruits: fetchedRecruitment[] = [
-    {
-      title: "hogehoge",
-      imgPath:
-        "http://s3-ap-northeast-1.amazonaws.com/i.schoo/images/teacher/2869.jpg",
-    },
-    {
-      title: "hogehoge",
-      imgPath:
-        "http://s3-ap-northeast-1.amazonaws.com/i.schoo/images/teacher/2869.jpg",
-    },
-    {
-      title: "hogehoge",
-      imgPath:
-        "http://s3-ap-northeast-1.amazonaws.com/i.schoo/images/teacher/2869.jpg",
-    },
-  ];
+type Props = {
+  userId: number;
+  recruits: fetchedTimeLine[];
+};
+
+const MyRecruits: FC<Props> = ({ userId, recruits }) => {
+  const navigate = useNavigate();
+  const [login, _] = useRecoilState(loginState);
+
+  if(userId === -1 || login.id !== userId) {
+    navigate('/')
+    return null;
+  }
+
+  const myRecruits = recruits.filter(
+    (recruit) => recruit.created_user === userId
+  );
 
   return (
     <>
-      {/* //TODO: カードの間の隙間がないので作る  */}
       <div className="grid grid-cols-1 gap-4">
-        {myRecruits.map(({ title, imgPath }) => (
-          <MyRecruitCard title={title} imgPath={imgPath} />
+        {myRecruits.map(({ title, img, id }) => (
+          <MyRecruitCard title={title} imgPath={img} id={id} />
         ))}
       </div>
     </>

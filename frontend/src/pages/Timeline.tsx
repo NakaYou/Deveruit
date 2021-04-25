@@ -2,45 +2,29 @@ import React, { FC } from "react";
 import RecruitCard from "../components/RecruitCard";
 
 type fetchedTimeLine = {
-  id: string;
+  id: number;
+  created_user: number;
+  img: string;
+  detail: string;
+  approval_msg: string;
+  refusal_msg: string;
   title: string;
-  userName: string;
-  imgPath: string;
+  created_at: string;
+  updated_at: string;
 };
-const TimeLine: FC = () => {
-  // server側から取得
-  const timeline: fetchedTimeLine[] = [
-    {
-      id: "1",
-      title: "hoge",
-      userName: "hogehoge",
-      imgPath:
-        "https://pbs.twimg.com/profile_images/908551383275548677/2xi0tEIl_400x400.jpg",
-    },
-    {
-      id: "2",
-      title: "hoge",
-      userName: "hogehoge",
-      imgPath:
-        "https://pbs.twimg.com/profile_images/908551383275548677/2xi0tEIl_400x400.jpg",
-    },
-    {
-      id: "3",
-      title: "hoge",
-      userName: "hogehoge",
-      imgPath:
-        "https://pbs.twimg.com/profile_images/908551383275548677/2xi0tEIl_400x400.jpg",
-    },
-  ];
 
+type Props = {
+  recruits: fetchedTimeLine[];
+};
+const TimeLine: FC<Props> = ({ recruits }) => {
   return (
     <div className="grid grid-cols-1 gap-4">
-      {timeline.map(({ id, title, userName, imgPath }) => (
+      {recruits.map(({ id, title, created_user, img }) => (
         <RecruitCard
           id={id}
           title={title}
-          userName={userName}
-          imgPath={imgPath}
+          userName={created_user}
+          imgPath={img}
         />
       ))}
     </div>
