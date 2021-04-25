@@ -2,9 +2,9 @@ import React, { FC } from "react";
 import { Link } from "react-router-dom";
 
 type Props = {
-  id: string;
+  id: number;
   title: string;
-  userName: string;
+  userName: number;
   imgPath: string;
 };
 
@@ -14,7 +14,7 @@ const RecruitCard: FC<Props> = ({ id, title, userName, imgPath }) => {
       <img
         className="m-auto p-2 h-32"
         height={10}
-        src={imgPath}
+        src="https://scontent-nrt1-1.xx.fbcdn.net/v/t1.18169-9/14212218_1161308940593475_1506054425856239035_n.jpg?_nc_cat=107&ccb=1-3&_nc_sid=9267fe&_nc_ohc=Um18U8g01OMAX-yWf4k&_nc_ht=scontent-nrt1-1.xx&oh=9883e55201ff61bb3fb12052119d5d4b&oe=60AC8021"
         alt="サムネイル画像"
       />
       <div className="mt-3 mb-3 mr-3 grid col-span-3 grid-cols-1 grid-rows-3">

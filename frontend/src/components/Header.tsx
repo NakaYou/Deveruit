@@ -2,7 +2,9 @@ import React, { FC, useState } from "react";
 import { Link, Route } from "react-router-dom";
 import menu from "../images/menu.png";
 import close from "../images/close.png";
-
+import { loginState } from "../atoms";
+import { useRecoilState } from "recoil";
+import { useNavigate } from "react-router-dom";
 type MenuProps = {
   userName: string;
   iconPath: string;
@@ -26,9 +28,6 @@ const Signinbar: FC<SigninProps> = () => {
   return (
     <div className="flex ml-auto text-white text-3xl ">
       <Link to="/signup" className="mr-5 my-auto hover:text-gray-500">
-        新規登録
-      </Link>
-      <Link to="/signin" className=" my-auto hover:text-gray-500">
         ログイン
       </Link>
     </div>
@@ -37,21 +36,19 @@ const Signinbar: FC<SigninProps> = () => {
 
 const Menubar: FC<MenuProps> = ({ userName, iconPath }) => {
   const [isOpenedMenu, setmenu] = useState(false);
+  const [_, setLogin] = useRecoilState(loginState);
+  const navigate = useNavigate();
 
   return (
     <div className="flex ml-auto relative">
       <div className="flex my-auto z-40">
-        <img
-          className="rounded-full h-10 mr-1"
-          src={"https://avatars.githubusercontent.com/u/72610232?v=4"}
-          alt="アイコン"
-        />
+        <img className="rounded-full h-10 mr-1" src={iconPath} alt="アイコン" />
         <p className="text-3xl mr-2">{userName}</p>
       </div>
       {isOpenedMenu ? (
         <>
           <img
-            className="my-3 w-8 h-8 z-40 mr-2 my-auto"
+            className="my-3 w-6 h-6 z-40 mr-2 my-auto"
             src={close}
             onClick={() => setmenu(!isOpenedMenu)}
           />
@@ -77,9 +74,21 @@ const Menubar: FC<MenuProps> = ({ userName, iconPath }) => {
               </Link>
             </li>
             <li>
-              <Link to="/logout" className="hover:text-gray-500">
+              <button
+                className="hover:text-gray-500"
+                onClick={() => {
+                  setLogin({
+                    id: -1,
+                    iconPath: "",
+                    userName: "",
+                    isLogin: false,
+                  });
+                  localStorage.removeItem("authToken");
+                  navigate("/");
+                }}
+              >
                 ログアウト
-              </Link>
+              </button>
             </li>
           </div>
         </>
@@ -103,7 +112,6 @@ const Bar: FC<BarProps> = ({ isLogin, userName, iconPath }) => {
 };
 
 const Header: FC<HeaderProps> = ({ isLogin, userName, iconPath }) => {
-  isLogin = true;
   return (
     <div className="flex mb-20">
       <div className="p-5 pr-0 pt-0 bg-green-300 flex w-full">
