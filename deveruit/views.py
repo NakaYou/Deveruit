@@ -16,7 +16,7 @@ class CreateUserView(generics.ListCreateAPIView):
 class RecruitmentViewSet(viewsets.ModelViewSet):
     queryset = Recruitment.objects.all()
     serializer_class = serializers.RecruitmentSerializer
-    authentication_classes = (authentication.TokenAuthentication,)
+    #authentication_classes = (authentication.TokenAuthentication,)
 
     # def perform_create(self, serializer):
     #     serializer.save(created_user=self.request.user)
